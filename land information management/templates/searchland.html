@@ -1,0 +1,38 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="contain">
+    <h2>See your searched lands:</h2>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4" style="background-color:white;">
+            <form method="POST" action="/searchland/">
+                {% csrf_token %}
+                <h4>Division: <input type="text"  name="division"></h4>
+                <h4>District: <input type="text" name="dist"></h4>
+                <h4>Upazilla: <input type="text" name="upazilla"></h4>
+
+                <h4>Catagory: <input type="text"  name="Catagory"></h4>
+                <h4>Area: <input type="number" name="Area"></h4>
+                <h4>Mouja: <input type="text"  name="mouja"></h4>
+                <h4>Dag no: <input type="number"  name="dag"></h4>
+
+
+                <input type="hidden" name="form_type" value="searchland" />
+                <button type="submit">submit</button>
+            </form>
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5" style="background-color:white;">
+            {% if lands %}
+                {% for land in lands %}
+            <h3 ><a href="/">{{ land.id }}</a></h3>
+                {% endfor %}
+            {% else %}
+                <h3>No lands found. Please retry.</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
